@@ -29,6 +29,9 @@ public class Seletor {
                 new Rectangle(23*editor.tamanhoTile, 10*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
                 new Rectangle(25*editor.tamanhoTile, 10*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
                 new Rectangle(23*editor.tamanhoTile, 12*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
+                new Rectangle(25*editor.tamanhoTile, 12*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
+                new Rectangle(23*editor.tamanhoTile, 14*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
+                new Rectangle(25*editor.tamanhoTile, 14*editor.tamanhoTile, 2*editor.tamanhoTile, 2*editor.tamanhoTile),
 
         };
 
@@ -38,6 +41,7 @@ public class Seletor {
 
         int col = editor.maxColunasTela - tamanho + 4;
 
+        editor.observador.desenhar(pincel, col, 0);
         mapa.desenharGrid(pincel, col, 2, 3);
 
     }

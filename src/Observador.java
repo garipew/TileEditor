@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Observador {
 
     // Componentes
@@ -47,6 +49,15 @@ public class Observador {
     }
 
 
+    public void desenhar(Graphics2D pincel, int x, int y){
+
+        pincel.setColor(Color.BLACK);
+        pincel.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+        pincel.drawString("x: " + colunaMundo + " y: " + linhaMundo, x*editor.tamanhoTile, editor.tamanhoTile);
+
+    }
+
+
     public void mudarDirecao(){
 
 
@@ -71,6 +82,19 @@ public class Observador {
 
         colunaMundo += direcao[0];
         linhaMundo += direcao[1];
+
+        if(colunaMundo < 0){
+            colunaMundo = 0;
+        }else if(colunaMundo > editor.maxColunas){
+            colunaMundo = editor.maxColunas;
+        }
+
+        if(linhaMundo < 0){
+            linhaMundo = 0;
+        }else if(linhaMundo > editor.maxLinhas){
+            linhaMundo = editor.maxLinhas;
+        }
+
 
         direcao[0] = 0;
         direcao[1] = 0;

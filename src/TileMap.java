@@ -116,6 +116,9 @@ public class TileMap {
         setup(8, "wall6");
         setup(9, "wall7");
         setup(10, "water");
+        setup(11, "gatlingun");
+        setup(12, "pistol");
+        setup(13, "sniper");
 
     }
 
