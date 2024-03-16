@@ -2,37 +2,47 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class TileMap {
 
     // Componentes
     EditorPanel editor;
+    File save;
 
     // Propriedades
     int[][] mapa;
     BufferedImage[] tiles;
     public final int tamanho;
+    String nome;
 
 
-    public TileMap(EditorPanel ed){
+    public TileMap(EditorPanel ed, String nome){
 
         this.tamanho = 20;
 
         this.editor = ed;
         this.mapa = new int[editor.maxColunas][editor.maxLinhas];
         this.tiles = new BufferedImage[15];
+        this.nome = nome;
 
-        carregarMapa("/mapa/mapa.txt");
+        carregarMapa();
         carregarTiles();
 
     }
 
 
-    public void carregarMapa(String path){
+    public void carregarMapa() {
+
+
+        checarSave(nome);
 
         try{
 
-            InputStream inputStream = getClass().getResourceAsStream(path);
+            FileInputStream inputStream = new FileInputStream(save);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
             int col = 0;
@@ -44,6 +54,8 @@ public class TileMap {
             while(lin < editor.maxLinhas){
 
                 String linha = bufferedReader.readLine();
+
+                linha = linha == null ? "0 ".repeat(editor.maxColunas) : linha;
 
                 while(col < editor.maxColunas) {
 
@@ -63,10 +75,30 @@ public class TileMap {
             bufferedReader.close();
 
 
-        } catch (Exception e){
+        } catch (IOException e){
+
+            e.printStackTrace();
 
         }
 
+
+    }
+
+
+    public void checarSave(String nome){
+
+        try {
+
+            save = new File( "saves/" + nome + ".txt");
+            if(save.createNewFile()){
+                System.out.println("File created: " + nome + ".txt");
+            } else{
+                System.out.println("Save file opened");
+            };
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -195,9 +227,9 @@ public class TileMap {
 
         if(tile != -1) {
 
-            if(coluna < mapa.length -1 &&
+            if(coluna < mapa.length &&
             coluna >= 0 &&
-            linha < mapa[0].length -1 &&
+            linha < mapa[0].length &&
             linha >= 0) {
 
                 mapa[coluna][linha] = tile;
@@ -208,13 +240,13 @@ public class TileMap {
     }
 
 
-    public void salvar(String nome){
+    public void salvar(){
 
         int col = 0;
         int lin = 0;
 
         try {
-            FileWriter file = new FileWriter(nome + ".txt");
+            FileWriter file = new FileWriter(save);
 
             while(lin < mapa[0].length - 1){
 

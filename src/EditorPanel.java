@@ -1,22 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class EditorPanel extends JPanel implements Runnable {
 
     // Componentes
     Controlador controlador = new Controlador();
     Thread editor;
-    TileMap mapa = new TileMap(this);
-    Seletor seletor = new Seletor(this);
-    Observador observador = new Observador(this);
+    TileMap mapa;
+    Seletor seletor;
+    Observador observador;
 
 
     // Propriedades
-    public final int maxLinhas = 100;
-    public final int maxColunas = 100;
+    public final int maxLinhas;
+    public final int maxColunas;
     public final int maxLinhasTela = 20;
     public final int maxColunasTela = 30;
-    public final int tamanhoTile = 25;
+    public final int tamanhoTile = 32;
     public Point mouse, offset;
 
     public EditorPanel(){
@@ -28,7 +29,26 @@ public class EditorPanel extends JPanel implements Runnable {
         this.addMouseListener(controlador);
         this.addKeyListener(controlador);
 
+        String[] args = readDefaultValues();
+        maxColunas = Integer.parseInt(args[1]);
+        maxLinhas = Integer.parseInt(args[2]);
+
+        this.mapa = new TileMap(this, args[0]);
+        this.seletor = new Seletor(this);
+        this.observador = new Observador(this);
+
+
     }
+
+
+    public String[] readDefaultValues(){
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nome Largura Altura");
+        return scanner.nextLine().split(" ");
+
+    }
+
 
     public void startPanelThread(){
 
@@ -78,7 +98,7 @@ public class EditorPanel extends JPanel implements Runnable {
         observador.update();
 
         if(controlador.salvar){
-            mapa.salvar("mapa");
+            mapa.salvar();
         }
 
     }
