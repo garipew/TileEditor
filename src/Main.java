@@ -11,9 +11,9 @@ public class Main {
 
      window.add(panel);
      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     window.setResizable(false);
      window.pack();
-
-
+     
      window.setVisible(true);
      panel.startPanelThread();
 
