@@ -181,7 +181,7 @@ public class TileMap {
                     (mundoY + 1 > editor.observador.linhaMundo - editor.observador.linhaTela) &&
                     (mundoY - 1 < editor.observador.linhaMundo + editor.observador.linhaTela)) {
 
-                pincel.drawImage(tiles[celulaAtual], telaX*editor.tamanhoTile, telaY*editor.tamanhoTile, editor.tamanhoTile, editor.tamanhoTile, null);
+                pincel.drawImage(tiles[celulaAtual], telaX*editor.tamanhoTile, telaY*editor.tamanhoTile, null);
             }
             colMundo++;
 

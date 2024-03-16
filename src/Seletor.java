@@ -41,7 +41,7 @@ public class Seletor {
 
         int col = editor.maxColunasTela - tamanho + 4;
 
-        editor.observador.desenhar(pincel, col, 0);
+        editor.observador.desenhar(pincel, col, 1);
         mapa.desenharGrid(pincel, col, 2, 3);
 
     }

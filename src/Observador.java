@@ -53,8 +53,11 @@ public class Observador {
 
         pincel.setColor(Color.BLACK);
         pincel.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-        pincel.drawString("x: " + colunaMundo + " y: " + linhaMundo, x*editor.tamanhoTile, editor.tamanhoTile);
+        pincel.drawString("x: " + colunaMundo + " y: " + linhaMundo, x*editor.tamanhoTile, y*editor.tamanhoTile);
 
+        if(tileSelecionada != -1) {
+            pincel.drawImage(editor.mapa.tiles[tileSelecionada], 0, 0, null);
+        }
     }
 
 
