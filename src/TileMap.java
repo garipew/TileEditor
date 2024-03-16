@@ -56,10 +56,9 @@ public class TileMap {
                 String linha = bufferedReader.readLine();
 
                 linha = linha == null ? "0 ".repeat(editor.maxColunas) : linha;
+                numerosLinha = linha.split(" ");
 
                 while(col < editor.maxColunas) {
-
-                    numerosLinha = linha.split(" ");
 
                     celulaAtual = Integer.parseInt(numerosLinha[col]);
 
@@ -251,7 +250,7 @@ public class TileMap {
         try {
             FileWriter file = new FileWriter(save);
 
-            while(lin < mapa[0].length - 1){
+            while(lin < mapa[0].length){
 
 
                 file.write(mapa[col][lin] + " ");
